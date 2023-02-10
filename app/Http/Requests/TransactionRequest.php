@@ -6,6 +6,18 @@ use App\Enums\TransactionStatusEnum;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
+/**
+ * @OA\Schema(
+ *     schema="TransactionRequest",
+ *     title="TransactionRequest",
+ *     @OA\Property(property="amount", type="string", example="example"),
+ *     @OA\Property(property="description", type="string", example="example"),
+ *     @OA\Property(property="currency", type="string", example="example"),
+ *     @OA\Property(property="status", type="string", example="example"),
+ *     @OA\Property(property="issuer", type="string", example="example"),
+ *     @OA\Property(property="transaction_date", type="string", example="example"),
+ * )
+ */
 class TransactionRequest extends FormRequest
 {
     /**

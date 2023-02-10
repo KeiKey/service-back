@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\V1\CompanyController;
+use App\Http\Controllers\Api\V1\IndividualController;
 use App\Http\Controllers\Api\V1\TransactionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -19,5 +21,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(['prefix' => 'v1', 'middleware' => ['auth:api', 'api_request']], function () {
     Route::get('/user', function (Request $request) {return $request->user();});
 
-    Route::apiResource('transactions', TransactionController::class, ['as' => 'api.v1']);
+    Route::apiResource('transactions', TransactionController::class, ['as' => 'api.v1'])->scoped(['transaction' => 'uuid']);
+    Route::apiResource('companies', CompanyController::class, ['as' => 'api.v1'])->scoped(['company' => 'uuid']);
+    Route::apiResource('individuals', IndividualController::class, ['as' => 'api.v1'])->scoped(['individual' => 'uuid']);
 });

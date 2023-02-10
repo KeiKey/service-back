@@ -6,6 +6,19 @@ use App\Enums\TransactionStatusEnum;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
+/**
+ * @OA\Schema(
+ *     schema="CompanyRequest",
+ *     title="CompanyRequest",
+ *     @OA\Property(property="name", type="string", example="example"),
+ *     @OA\Property(property="email", type="string", example="example"),
+ *     @OA\Property(property="address", type="string", example="example"),
+ *     @OA\Property(property="vat_number", type="string", example="example"),
+ *     @OA\Property(property="contact_name", type="string", example="example"),
+ *     @OA\Property(property="contact_phone", type="string", example="example"),
+ *     @OA\Property(property="contact_email", type="string", example="example"),
+ * )
+ */
 class CompanyRequest extends FormRequest
 {
     /**
@@ -26,13 +39,13 @@ class CompanyRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'          => ['required'],
-            'email'         => ['required'],
-            'address'       => ['required'],
-            'vat_number'    => ['required'],
-            'contact_name'  => ['required'],
-            'contact_phone' => ['required'],
-            'contact_email' => ['required'],
+            'name'          => ['required', 'max:45'],
+            'email'         => ['required', 'max:255'],
+            'address'       => ['required', 'max:255'],
+            'vat_number'    => ['required', 'max:255'],
+            'contact_name'  => ['required', 'max:255'],
+            'contact_phone' => ['required', 'max:255'],
+            'contact_email' => ['required', 'max:255'],
         ];
     }
 }

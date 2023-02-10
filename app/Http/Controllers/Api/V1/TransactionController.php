@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Http\Requests\TransactionRequest;
+use App\Models\Transaction\Transaction;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -9,7 +11,7 @@ class TransactionController extends BaseController
 {
     /**
      * @OA\Get(
-     *     path="/api/v1/transactions",
+     *     path="api/v1/transactions",
      *     summary="Retrive a listing of the Transactions",
      *     tags={"Transactions"},
      *     @OA\Response(
@@ -29,52 +31,148 @@ class TransactionController extends BaseController
      *
      * @return JsonResponse
      */
-    public function index(Request $request)
+    public function index(Request $request): JsonResponse
     {
         //
     }
 
     /**
-     * Store a newly created resource in storage.
+     * @OA\Post(
+     *      path="api/v1/transactions",
+     *      tags={"Transactions"},
+     *      summary="Store new Transaction",
+     *      @OA\RequestBody(
+     *          required=true,
+     *          @OA\JsonContent(ref="#/components/schemas/TransactionRequest")
+     *      ),
+     *      @OA\Response(
+     *          response=201,
+     *          description="OK",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="code", example=0),
+     *             @OA\Property(property="message", example=""),
+     *             @OA\Property(property="data", type="array",
+     *                 @OA\Items(ref="#/components/schemas/Transaction")
+     *             )
+     *         )
+     *       )
+     * )
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param TransactionRequest $request
+     *
+     * @return JsonResponse
      */
-    public function store(Request $request)
+    public function store(TransactionRequest $request): JsonResponse
     {
         //
     }
 
     /**
-     * Display the specified resource.
+     * @OA\Get(
+     *      path="api/v1/transactions/{uuid}",
+     *      tags={"Transactions"},
+     *      summary="Get an existing Transaction",
+     *      @OA\Parameter(
+     *          name="uuid",
+     *          description="Individual uuid",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="string",
+     *              example="389ffffe-b89c-47b6-bc63-cf5fd2a88218"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="OK",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="code", example=0),
+     *              @OA\Property(property="message", example=""),
+     *              @OA\Property(property="data", type="array",
+     *                  @OA\Items(ref="#/components/schemas/Transaction")
+     *              )
+     *          )
+     *      )
+     * )
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Transaction $company
+     * @return JsonResponse
      */
-    public function show($id)
+    public function show(Transaction $company): JsonResponse
     {
         //
     }
 
     /**
-     * Update the specified resource in storage.
+     * @OA\Put(
+     *      path="api/v1/transactions/{uuid}",
+     *      tags={"Transactions"},
+     *      summary="Update an existing Transaction",
+     *      @OA\Parameter(
+     *          name="uuid",
+     *          description="Individual uuid",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="string",
+     *              example="389ffffe-b89c-47b6-bc63-cf5fd2a88218"
+     *          )
+     *      ),
+     *      @OA\RequestBody(
+     *          required=true,
+     *          @OA\JsonContent(ref="#/components/schemas/TransactionRequest")
+     *      ),
+     *      @OA\Response(
+     *          response=202,
+     *          description="OK",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="code", example=0),
+     *             @OA\Property(property="message", example=""),
+     *             @OA\Property(property="data", type="array",
+     *                 @OA\Items(ref="#/components/schemas/Transaction")
+     *             )
+     *         )
+     *       )
+     * )
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param TransactionRequest $request
+     * @param Transaction $company
+     * @return JsonResponse
      */
-    public function update(Request $request, $id)
+    public function update(TransactionRequest $request, Transaction $company): JsonResponse
     {
         //
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @OA\Delete(
+     *      path="api/v1/transactions/{uuid}",
+     *      tags={"Transactions"},
+     *      summary="Delete existing Transaction",
+     *      @OA\Parameter(
+     *          name="uuid",
+     *          description="Individual uuid",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="string",
+     *              example="389ffffe-b89c-47b6-bc63-cf5fd2a88218"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=204,
+     *          description="OK",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="code", example=0),
+     *             @OA\Property(property="message", example=""),
+     *             @OA\Property(property="data", type="array",
+     *                 @OA\Items(ref="#/components/schemas/Transaction")
+     *             )
+     *         )
+     *       )
+     * )
      */
-    public function destroy($id)
+    public function destroy(Transaction $company): JsonResponse
     {
         //
     }

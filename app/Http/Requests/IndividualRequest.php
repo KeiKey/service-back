@@ -6,6 +6,17 @@ use App\Enums\TransactionStatusEnum;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
+/**
+ * @OA\Schema(
+ *     schema="IndividualRequest",
+ *     title="IndividualRequest",
+ *     @OA\Property(property="name", type="string", example="example"),
+ *     @OA\Property(property="email", type="string", example="example"),
+ *     @OA\Property(property="address", type="string", example="example"),
+ *     @OA\Property(property="phone_number", type="string", example="example"),
+ *     @OA\Property(property="vat_number", type="string", example="example"),
+ * )
+ */
 class IndividualRequest extends FormRequest
 {
     /**

@@ -2,6 +2,8 @@
 
 namespace App\Models\Transaction;
 
+use Illuminate\Database\Eloquent\Relations\MorphTo;
+
 /**
  * Trait RelationshipTrait
  *
@@ -9,4 +11,11 @@ namespace App\Models\Transaction;
  */
 trait RelationshipTrait
 {
+    /**
+     * Get the parent issuer model (individual or company).
+     */
+    public function issuer(): MorphTo
+    {
+        return $this->morphTo();
+    }
 }

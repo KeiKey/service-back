@@ -2,6 +2,9 @@
 
 namespace App\Models\Company;
 
+use App\Models\Transaction\Transaction;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
+
 /**
  * Trait RelationshipTrait
  *
@@ -9,4 +12,11 @@ namespace App\Models\Company;
  */
 trait RelationshipTrait
 {
+    /**
+     * Get all the Companies transactions.
+     */
+    public function transactions(): MorphMany
+    {
+        return $this->morphMany(Transaction::class, 'issuer');
+    }
 }
