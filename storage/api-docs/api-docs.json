@@ -1,0 +1,220 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API V1",
+        "version": "0.1"
+    },
+    "paths": {
+        "/api/v1/companies": {
+            "get": {
+                "tags": [
+                    "Companies"
+                ],
+                "summary": "Retrive a listing of the Companies",
+                "operationId": "707a45d5190cbbe1b43f69f6e5d0131d",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "example": 0
+                                        },
+                                        "message": {
+                                            "example": ""
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Company"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/individuals": {
+            "get": {
+                "tags": [
+                    "Individuals"
+                ],
+                "summary": "Retrive a listing of the Individuals",
+                "operationId": "068afd82cb1b0cc02737284216f5f600",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "example": 0
+                                        },
+                                        "message": {
+                                            "example": ""
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Individual"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/transactions": {
+            "get": {
+                "tags": [
+                    "Transactions"
+                ],
+                "summary": "Retrive a listing of the Transactions",
+                "operationId": "0ffe6bf7980513c9d322e1ba4d400ff2",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "example": 0
+                                        },
+                                        "message": {
+                                            "example": ""
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Transaction"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Company": {
+                "title": "Company",
+                "properties": {
+                    "uuid": {
+                        "type": "string",
+                        "example": "389ffffe-b89c-47b6-bc63-cf5fd2a88218"
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "example"
+                    },
+                    "email": {
+                        "type": "string",
+                        "example": "example"
+                    },
+                    "address": {
+                        "type": "string",
+                        "example": "example"
+                    },
+                    "vat_number": {
+                        "type": "string",
+                        "example": "example"
+                    },
+                    "contact_name": {
+                        "type": "string",
+                        "example": "example"
+                    },
+                    "contact_phone": {
+                        "type": "string",
+                        "example": "example"
+                    },
+                    "contact_email": {
+                        "type": "string",
+                        "example": "example"
+                    }
+                },
+                "type": "object"
+            },
+            "Individual": {
+                "title": "Individual",
+                "properties": {
+                    "uuid": {
+                        "type": "string",
+                        "example": "389ffffe-b89c-47b6-bc63-cf5fd2a88218"
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "example"
+                    },
+                    "email": {
+                        "type": "string",
+                        "example": "example"
+                    },
+                    "address": {
+                        "type": "string",
+                        "example": "example"
+                    },
+                    "phone_number": {
+                        "type": "string",
+                        "example": "example"
+                    },
+                    "vat_number": {
+                        "type": "string",
+                        "example": "example"
+                    }
+                },
+                "type": "object"
+            },
+            "Transaction": {
+                "title": "Transaction",
+                "properties": {
+                    "uuid": {
+                        "type": "string",
+                        "example": "389ffffe-b89c-47b6-bc63-cf5fd2a88218"
+                    },
+                    "amount": {
+                        "type": "string",
+                        "example": "example"
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "example"
+                    },
+                    "currency": {
+                        "type": "string",
+                        "example": "example"
+                    },
+                    "status": {
+                        "type": "string",
+                        "example": "example"
+                    },
+                    "issuer": {
+                        "type": "string",
+                        "example": "example"
+                    },
+                    "transaction_date": {
+                        "type": "string",
+                        "example": "example"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    }
+}

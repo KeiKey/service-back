@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Models\Transaction;
+namespace App\Models\Individual;
 
 use App\Traits\HasUUID;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Class Transaction
+ * Class Individual
  *
  * @property int id
  */
-class Transaction extends Model
+class Individual extends Model
 {
     use AttributesTrait,
         RelationshipTrait,
@@ -25,12 +25,11 @@ class Transaction extends Model
      * @var array
      */
     protected $fillable = [
-        'amount',
-        'description',
-        'currency',
-        'status',
-        'issuer',
-        'transaction_date'
+        'name',
+        'email',
+        'address',
+        'phone_number',
+        'vat_number'
     ];
 
     /**
@@ -39,13 +38,4 @@ class Transaction extends Model
      * @var array
      */
     protected $guarded = ['id'];
-
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'transaction_date' => 'datetime',
-    ];
 }

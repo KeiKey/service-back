@@ -5,13 +5,13 @@ namespace App\Http\Controllers\Api\V1;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-class TransactionController extends BaseController
+class IndividualController extends BaseController
 {
     /**
      * @OA\Get(
-     *     path="/api/v1/transactions",
-     *     summary="Retrive a listing of the Transactions",
-     *     tags={"Transactions"},
+     *     path="/api/v1/individuals",
+     *     summary="Retrive a listing of the Individuals",
+     *     tags={"Individuals"},
      *     @OA\Response(
      *         response=200,
      *         description="OK",
@@ -19,7 +19,7 @@ class TransactionController extends BaseController
      *             @OA\Property(property="code", example=0),
      *             @OA\Property(property="message", example=""),
      *             @OA\Property(property="data", type="array",
-     *                 @OA\Items(ref="#/components/schemas/Transaction")
+     *                 @OA\Items(ref="#/components/schemas/Individual")
      *             )
      *         )
      *     )
@@ -29,7 +29,7 @@ class TransactionController extends BaseController
      *
      * @return JsonResponse
      */
-    public function index(Request $request)
+    public function index(Request $request): JsonResponse
     {
         //
     }
