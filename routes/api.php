@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\V1\TransactionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+// V1 API Routes
+Route::group(['prefix' => 'v1', 'middleware' => ['auth:api', 'api_request']], function () {
+    Route::get('/user', function (Request $request) {return $request->user();});
+
+    Route::apiResource('transactions', TransactionController::class, ['as' => 'api.v1']);
 });
