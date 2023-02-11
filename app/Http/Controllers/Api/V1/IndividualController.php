@@ -3,12 +3,18 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Requests\IndividualRequest;
+use App\Http\Resources\IndividualResource;
 use App\Models\Individual\Individual;
+use App\Services\IndividualService;
+use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class IndividualController extends BaseController
 {
+    public function __construct(private IndividualService $individualService)
+    {}
+
     /**
      * @OA\Get(
      *     path="api/v1/individuals",
@@ -33,7 +39,7 @@ class IndividualController extends BaseController
      */
     public function index(Request $request): JsonResponse
     {
-        //
+        return $this->sendResponse(IndividualResource::collection(Individual::query()->get()));
     }
 
     /**
@@ -64,7 +70,13 @@ class IndividualController extends BaseController
      */
     public function store(IndividualRequest $request): JsonResponse
     {
-        //
+        try {
+            $individual = $this->individualService->createIndividual($request->validated());
+
+            return $this->sendResponse(new IndividualResource($individual), '', 201);
+        } catch (Exception $exception) {
+            return $this->sendResponse([],  $exception->getMessage(), 500);
+        }
     }
 
     /**
@@ -95,12 +107,12 @@ class IndividualController extends BaseController
      *      )
      * )
      *
-     * @param Individual $company
+     * @param Individual $individual
      * @return JsonResponse
      */
-    public function show(Individual $company): JsonResponse
+    public function show(Individual $individual): JsonResponse
     {
-        //
+        return $this->sendResponse(new IndividualResource($individual));
     }
 
     /**
@@ -136,12 +148,18 @@ class IndividualController extends BaseController
      * )
      *
      * @param IndividualRequest $request
-     * @param Individual $company
+     * @param Individual $individual
      * @return JsonResponse
      */
-    public function update(IndividualRequest $request, Individual $company): JsonResponse
+    public function update(IndividualRequest $request, Individual $individual): JsonResponse
     {
-        //
+        try {
+            $individual = $this->individualService->updateIndividual($individual, $request->validated());
+
+            return $this->sendResponse(new IndividualResource($individual), '', 202);
+        } catch (Exception $exception) {
+            return $this->sendResponse([],  $exception->getMessage(), 500);
+        }
     }
 
     /**
@@ -172,8 +190,14 @@ class IndividualController extends BaseController
      *       )
      * )
      */
-    public function destroy(Individual $company): JsonResponse
+    public function destroy(Individual $individual): JsonResponse
     {
-        //
+        try {
+            $individual = $this->individualService->deleteIndividual($individual);
+
+            return $this->sendResponse(new IndividualResource($individual), '', 204);
+        } catch (Exception $exception) {
+            return $this->sendResponse([],  $exception->getMessage(), 500);
+        }
     }
 }

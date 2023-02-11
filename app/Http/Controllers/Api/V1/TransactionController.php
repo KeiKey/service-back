@@ -3,12 +3,18 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Requests\TransactionRequest;
+use App\Http\Resources\TransactionResource;
 use App\Models\Transaction\Transaction;
+use App\Services\TransactionService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Exception;
 
 class TransactionController extends BaseController
 {
+    public function __construct(private TransactionService $transactionService)
+    {}
+
     /**
      * @OA\Get(
      *     path="api/v1/transactions",
@@ -33,7 +39,7 @@ class TransactionController extends BaseController
      */
     public function index(Request $request): JsonResponse
     {
-        //
+        return $this->sendResponse(TransactionResource::collection(Transaction::query()->get()));
     }
 
     /**
@@ -64,7 +70,13 @@ class TransactionController extends BaseController
      */
     public function store(TransactionRequest $request): JsonResponse
     {
-        //
+        try {
+            $transaction = $this->transactionService->createTransaction($request->validated());
+
+            return $this->sendResponse(new TransactionResource($transaction), '', 201);
+        } catch (Exception $exception) {
+            return $this->sendResponse([],  $exception->getMessage(), 500);
+        }
     }
 
     /**
@@ -95,12 +107,12 @@ class TransactionController extends BaseController
      *      )
      * )
      *
-     * @param Transaction $company
+     * @param Transaction $transaction
      * @return JsonResponse
      */
-    public function show(Transaction $company): JsonResponse
+    public function show(Transaction $transaction): JsonResponse
     {
-        //
+        return $this->sendResponse(new TransactionResource($transaction));
     }
 
     /**
@@ -136,12 +148,18 @@ class TransactionController extends BaseController
      * )
      *
      * @param TransactionRequest $request
-     * @param Transaction $company
+     * @param Transaction $transaction
      * @return JsonResponse
      */
-    public function update(TransactionRequest $request, Transaction $company): JsonResponse
+    public function update(TransactionRequest $request, Transaction $transaction): JsonResponse
     {
-        //
+        try {
+            $transaction = $this->transactionService->updateTransaction($transaction, $request->validated());
+
+            return $this->sendResponse(new TransactionResource($transaction), '', 202);
+        } catch (Exception $exception) {
+            return $this->sendResponse([],  $exception->getMessage(), 500);
+        }
     }
 
     /**
@@ -172,8 +190,14 @@ class TransactionController extends BaseController
      *       )
      * )
      */
-    public function destroy(Transaction $company): JsonResponse
+    public function destroy(Transaction $transaction): JsonResponse
     {
-        //
+        try {
+            $transaction = $this->transactionService->deleteTransaction($transaction);
+
+            return $this->sendResponse(new TransactionResource($transaction), '', 204);
+        } catch (Exception $exception) {
+            return $this->sendResponse([],  $exception->getMessage(), 500);
+        }
     }
 }

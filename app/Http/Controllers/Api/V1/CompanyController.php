@@ -2,13 +2,19 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Http\Resources\CompanyResource;
 use App\Http\Requests\CompanyRequest;
-use App\Models\Company\Company;
 use Illuminate\Http\JsonResponse;
+use App\Services\CompanyService;
+use App\Models\Company\Company;
 use Illuminate\Http\Request;
+use Exception;
 
 class CompanyController extends BaseController
 {
+    public function __construct(private CompanyService $companyService)
+    {}
+
     /**
      * @OA\Get(
      *     path="api/v1/companies",
@@ -33,7 +39,7 @@ class CompanyController extends BaseController
      */
     public function index(Request $request): JsonResponse
     {
-        //
+        return $this->sendResponse(CompanyResource::collection(Company::query()->get()));
     }
 
     /**
@@ -64,7 +70,13 @@ class CompanyController extends BaseController
      */
     public function store(CompanyRequest $request): JsonResponse
     {
-        //
+        try {
+            $company = $this->companyService->createCompany($request->validated());
+
+            return $this->sendResponse(new CompanyResource($company), '', 201);
+        } catch (Exception $exception) {
+            return $this->sendResponse([],  $exception->getMessage(), 500);
+        }
     }
 
     /**
@@ -100,7 +112,7 @@ class CompanyController extends BaseController
      */
     public function show(Company $company): JsonResponse
     {
-        //
+        return $this->sendResponse(new CompanyResource($company));
     }
 
     /**
@@ -141,7 +153,13 @@ class CompanyController extends BaseController
      */
     public function update(CompanyRequest $request, Company $company): JsonResponse
     {
-        //
+        try {
+            $company = $this->companyService->updateCompany($company, $request->validated());
+
+            return $this->sendResponse(new CompanyResource($company), '', 202);
+        } catch (Exception $exception) {
+            return $this->sendResponse([],  $exception->getMessage(), 500);
+        }
     }
 
     /**
@@ -174,6 +192,12 @@ class CompanyController extends BaseController
      */
     public function destroy(Company $company): JsonResponse
     {
-        //
+        try {
+            $company = $this->companyService->deleteCompany($company);
+
+            return $this->sendResponse(new CompanyResource($company), '', 204);
+        } catch (Exception $exception) {
+            return $this->sendResponse([],  $exception->getMessage(), 500);
+        }
     }
 }
