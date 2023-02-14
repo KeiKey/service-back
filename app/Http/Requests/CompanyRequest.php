@@ -40,12 +40,12 @@ class CompanyRequest extends FormRequest
     {
         return [
             'name'          => ['required', 'max:45'],
-            'email'         => ['required', 'max:255'],
+            'email'         => ['required', 'max:255', 'unique:companies,email'],
             'address'       => ['required', 'max:255'],
             'vat_number'    => ['required', 'max:255'],
             'contact_name'  => ['required', 'max:45'],
             'contact_phone' => ['required', 'max:255'],
-            'contact_email' => ['required', 'max:255'],
+            'contact_email' => ['required', 'max:255', 'unique:companies,contact_email'],
         ];
     }
 }

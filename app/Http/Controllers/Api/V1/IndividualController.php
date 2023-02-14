@@ -46,6 +46,45 @@ class IndividualController extends BaseController
     }
 
     /**
+     * @OA\Get(
+     *      path="api/v1/individuals/{uuid}",
+     *      tags={"Individuals"},
+     *      summary="Get an existing Individual",
+     *      @OA\Parameter(
+     *          name="uuid",
+     *          description="Individual uuid",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="string",
+     *              example="389ffffe-b89c-47b6-bc63-cf5fd2a88218"
+     *          )
+     *      ),
+     *      @OA\Parameter(name="Authorization", required=true, in="header",
+     *          @OA\Schema(type="string", example="Bearer epl5d5olRkge9DK60acfBrrFIHufNeVIXngSWJ7ReCNkr11I6WL")
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="OK",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="code", example=0),
+     *              @OA\Property(property="message", example=""),
+     *              @OA\Property(property="data", type="array",
+     *                  @OA\Items(ref="#/components/schemas/Individual")
+     *              )
+     *          )
+     *      )
+     * )
+     *
+     * @param Individual $individual
+     * @return JsonResponse
+     */
+    public function show(Individual $individual): JsonResponse
+    {
+        return $this->sendResponse(new IndividualResource($individual));
+    }
+
+    /**
      * @OA\Post(
      *      path="api/v1/individuals",
      *      tags={"Individuals"},
@@ -83,45 +122,6 @@ class IndividualController extends BaseController
         } catch (Exception $exception) {
             return $this->sendResponse([],  $exception->getMessage(), 500);
         }
-    }
-
-    /**
-     * @OA\Get(
-     *      path="api/v1/individuals/{uuid}",
-     *      tags={"Individuals"},
-     *      summary="Get an existing Individual",
-     *      @OA\Parameter(
-     *          name="uuid",
-     *          description="Individual uuid",
-     *          required=true,
-     *          in="path",
-     *          @OA\Schema(
-     *              type="string",
-     *              example="389ffffe-b89c-47b6-bc63-cf5fd2a88218"
-     *          )
-     *      ),
-     *      @OA\Parameter(name="Authorization", required=true, in="header",
-     *          @OA\Schema(type="string", example="Bearer epl5d5olRkge9DK60acfBrrFIHufNeVIXngSWJ7ReCNkr11I6WL")
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="OK",
-     *          @OA\JsonContent(
-     *              @OA\Property(property="code", example=0),
-     *              @OA\Property(property="message", example=""),
-     *              @OA\Property(property="data", type="array",
-     *                  @OA\Items(ref="#/components/schemas/Individual")
-     *              )
-     *          )
-     *      )
-     * )
-     *
-     * @param Individual $individual
-     * @return JsonResponse
-     */
-    public function show(Individual $individual): JsonResponse
-    {
-        return $this->sendResponse(new IndividualResource($individual));
     }
 
     /**

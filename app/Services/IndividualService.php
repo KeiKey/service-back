@@ -20,6 +20,7 @@ class IndividualService
             'email'        => $data['email'],
             'address'      => $data['address'],
             'phone_number' => $data['phone_number'],
+            'vat_number'   => $data['vat_number'],
         ]);
 
         return $individual;

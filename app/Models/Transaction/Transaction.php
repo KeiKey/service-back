@@ -10,6 +10,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * Class Transaction
  *
  * @property int id
+ * @property string amount
+ * @property string description
+ * @property string currency
+ * @property string status
+ * @property string issuer
+ * @property string transaction_date
  */
 class Transaction extends Model
 {

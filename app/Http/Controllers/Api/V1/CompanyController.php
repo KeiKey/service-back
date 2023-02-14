@@ -45,14 +45,46 @@ class CompanyController extends BaseController
      */
     public function index(Request $request): JsonResponse
     {
-//        $token = ->createToken('Laravel Password Grant Client')->accessToken;
-        User::query()->create([
-            'name' => Str::random(),
-            'email' => Str::random(),
-            'password' => Hash::make($request['password']),
-            'api_toke' => Str::random(60)
-        ]);
         return $this->sendResponse(CompanyResource::collection(Company::query()->get()));
+    }
+
+    /**
+     * @OA\Get(
+     *      path="api/v1/companies/{uuid}",
+     *      tags={"Companies"},
+     *      summary="Get an existing Company",
+     *      @OA\Parameter(
+     *          name="uuid",
+     *          description="Individual uuid",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="string",
+     *              example="389ffffe-b89c-47b6-bc63-cf5fd2a88218"
+     *          )
+     *      ),
+     *      @OA\Parameter(name="Authorization", required=true, in="header",
+     *          @OA\Schema(type="string", example="Bearer epl5d5olRkge9DK60acfBrrFIHufNeVIXngSWJ7ReCNkr11I6WL")
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="OK",
+     *          @OA\JsonContent(
+     *              @OA\Property(property="code", example=0),
+     *              @OA\Property(property="message", example=""),
+     *              @OA\Property(property="data", type="array",
+     *                  @OA\Items(ref="#/components/schemas/Company")
+     *              )
+     *          )
+     *      )
+     * )
+     *
+     * @param Company $company
+     * @return JsonResponse
+     */
+    public function show(Company $company): JsonResponse
+    {
+        return $this->sendResponse(new CompanyResource($company));
     }
 
     /**
@@ -93,45 +125,6 @@ class CompanyController extends BaseController
         } catch (Exception $exception) {
             return $this->sendResponse([],  $exception->getMessage(), 500);
         }
-    }
-
-    /**
-     * @OA\Get(
-     *      path="api/v1/companies/{uuid}",
-     *      tags={"Companies"},
-     *      summary="Get an existing Company",
-     *      @OA\Parameter(
-     *          name="uuid",
-     *          description="Individual uuid",
-     *          required=true,
-     *          in="path",
-     *          @OA\Schema(
-     *              type="string",
-     *              example="389ffffe-b89c-47b6-bc63-cf5fd2a88218"
-     *          )
-     *      ),
-     *      @OA\Parameter(name="Authorization", required=true, in="header",
-     *          @OA\Schema(type="string", example="Bearer epl5d5olRkge9DK60acfBrrFIHufNeVIXngSWJ7ReCNkr11I6WL")
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="OK",
-     *          @OA\JsonContent(
-     *              @OA\Property(property="code", example=0),
-     *              @OA\Property(property="message", example=""),
-     *              @OA\Property(property="data", type="array",
-     *                  @OA\Items(ref="#/components/schemas/Company")
-     *              )
-     *          )
-     *      )
-     * )
-     *
-     * @param Company $company
-     * @return JsonResponse
-     */
-    public function show(Company $company): JsonResponse
-    {
-        return $this->sendResponse(new CompanyResource($company));
     }
 
     /**

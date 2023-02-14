@@ -38,7 +38,7 @@ class IndividualRequest extends FormRequest
     {
         return [
             'name'          => ['required', 'max:45'],
-            'email'         => ['required', 'max:255'],
+            'email'         => ['required', 'max:255', 'unique:individuals,email'],
             'address'       => ['required', 'max:255'],
             'phone_number'  => ['required', 'max:255'],
             'vat_number'    => ['required', 'max:255'],

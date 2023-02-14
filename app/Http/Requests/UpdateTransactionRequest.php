@@ -34,12 +34,8 @@ class UpdateTransactionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'amount'           => ['required'],
-            'description'      => ['nullable'],
-            'currency'         => ['required'],
-            'status'           => ['required', Rule::in(TransactionStatusEnum::toArray())],
-            'issuer'           => ['required'],
-            'transaction_date' => ['required'],
+            'description' => ['nullable'],
+            'status'      => ['nullable', Rule::in(TransactionStatusEnum::toArray())],
         ];
     }
 }

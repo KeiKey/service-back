@@ -3,7 +3,10 @@
 namespace App\Services;
 
 use App\Events\TransactionCreated;
+use App\Models\Company\Company;
+use App\Models\Individual\Individual;
 use App\Models\Transaction\Transaction;
+use Illuminate\Support\Facades\DB;
 
 class TransactionService
 {
@@ -15,15 +18,21 @@ class TransactionService
      */
     public function createTransaction(array $data): Transaction
     {
-        /** @var Transaction $transaction */
-        $transaction = Transaction::query()->create([
-            'amount'           => $data['amount'],
-            'description'      => $data['description'],
-            'currency'         => $data['currency'],
-            'status'           => $data['status'],
-            'issuer'           => $data['issuer'],
-            'transaction_date' => $data['transaction_date'],
-        ]);
+        $transaction = DB::transaction(function () use ($data){
+            $transaction = new Transaction();
+            $transaction->amount = $data['amount'];
+            $transaction->description = $data['description'];
+            $transaction->currency = $data['currency'];
+            $transaction->status = $data['status'];
+            $transaction->transaction_date = $data['transaction_date'];
+
+            $issuer = Individual::query()->byUUID($data['issuer'])->first()
+                ?: Company::query()->byUUID($data['issuer'])->first();
+
+            $issuer->transactions()->save($transaction);
+
+            return $transaction;
+        });
 
         TransactionCreated::dispatch($transaction);
 
@@ -39,14 +48,16 @@ class TransactionService
      */
     public function updateTransaction(Transaction $transaction, array $data): Transaction
     {
-        $transaction->update([
-            'amount'           => $data['amount'],
-            'description'      => $data['description'],
-            'currency'         => $data['currency'],
-            'status'           => $data['status'],
-            'issuer'           => $data['issuer'],
-            'transaction_date' => $data['transaction_date'],
-        ]);
+        $fieldsToBeUpdated = [];
+
+        if (isset($data['description'])) {
+            $fieldsToBeUpdated['description'] = $data['description'];
+        }
+        if (isset($data['status'])) {
+            $fieldsToBeUpdated['status'] = $data['status'];
+        }
+
+        $transaction->update($fieldsToBeUpdated);
 
         return $transaction;
     }

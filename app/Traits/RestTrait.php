@@ -22,7 +22,7 @@ trait RestTrait
     {
         $response = [
             'code'    => $code,
-            'message' => ''
+            'message' => $message
         ];
 
         if (empty($data)) {
