@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Http\Requests\TransactionRequest;
+use App\Http\Requests\StoreTransactionRequest;
+use App\Http\Requests\UpdateTransactionRequest;
 use App\Http\Resources\TransactionResource;
 use App\Models\Transaction\Transaction;
 use App\Services\TransactionService;
@@ -49,7 +50,7 @@ class TransactionController extends BaseController
      *      summary="Store new Transaction",
      *      @OA\RequestBody(
      *          required=true,
-     *          @OA\JsonContent(ref="#/components/schemas/TransactionRequest")
+     *          @OA\JsonContent(ref="#/components/schemas/StoreTransactionRequest")
      *      ),
      *      @OA\Response(
      *          response=201,
@@ -64,11 +65,11 @@ class TransactionController extends BaseController
      *       )
      * )
      *
-     * @param TransactionRequest $request
+     * @param StoreTransactionRequest $request
      *
      * @return JsonResponse
      */
-    public function store(TransactionRequest $request): JsonResponse
+    public function store(StoreTransactionRequest $request): JsonResponse
     {
         try {
             $transaction = $this->transactionService->createTransaction($request->validated());
@@ -132,7 +133,7 @@ class TransactionController extends BaseController
      *      ),
      *      @OA\RequestBody(
      *          required=true,
-     *          @OA\JsonContent(ref="#/components/schemas/TransactionRequest")
+     *          @OA\JsonContent(ref="#/components/schemas/UpdateTransactionRequest")
      *      ),
      *      @OA\Response(
      *          response=202,
@@ -147,11 +148,11 @@ class TransactionController extends BaseController
      *       )
      * )
      *
-     * @param TransactionRequest $request
+     * @param UpdateTransactionRequest $request
      * @param Transaction $transaction
      * @return JsonResponse
      */
-    public function update(TransactionRequest $request, Transaction $transaction): JsonResponse
+    public function update(UpdateTransactionRequest $request, Transaction $transaction): JsonResponse
     {
         try {
             $transaction = $this->transactionService->updateTransaction($transaction, $request->validated());

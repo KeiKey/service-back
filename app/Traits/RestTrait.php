@@ -18,10 +18,10 @@ trait RestTrait
      *
      * @return JsonResponse
      */
-    public function sendResponse(mixed $data, string $message = '', int $code = 0): JsonResponse
+    public function sendResponse(mixed $data, string $message = '', int $code = 200): JsonResponse
     {
         $response = [
-            'code'    => true,
+            'code'    => $code,
             'message' => ''
         ];
 

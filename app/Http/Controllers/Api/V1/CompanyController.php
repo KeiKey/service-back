@@ -9,6 +9,7 @@ use App\Services\CompanyService;
 use App\Models\Company\Company;
 use Illuminate\Http\Request;
 use Exception;
+use Illuminate\Support\Str;
 
 class CompanyController extends BaseController
 {

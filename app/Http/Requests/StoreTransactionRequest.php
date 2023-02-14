@@ -8,8 +8,8 @@ use Illuminate\Validation\Rule;
 
 /**
  * @OA\Schema(
- *     schema="TransactionRequest",
- *     title="TransactionRequest",
+ *     schema="StoreTransactionRequest",
+ *     title="StoreTransactionRequest",
  *     @OA\Property(property="amount", type="string", example="example"),
  *     @OA\Property(property="description", type="string", example="example"),
  *     @OA\Property(property="currency", type="string", example="example"),
@@ -18,7 +18,7 @@ use Illuminate\Validation\Rule;
  *     @OA\Property(property="transaction_date", type="string", example="example"),
  * )
  */
-class TransactionRequest extends FormRequest
+class StoreTransactionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

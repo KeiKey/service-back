@@ -43,7 +43,7 @@ class CompanyRequest extends FormRequest
             'email'         => ['required', 'max:255'],
             'address'       => ['required', 'max:255'],
             'vat_number'    => ['required', 'max:255'],
-            'contact_name'  => ['required', 'max:255'],
+            'contact_name'  => ['required', 'max:45'],
             'contact_phone' => ['required', 'max:255'],
             'contact_email' => ['required', 'max:255'],
         ];

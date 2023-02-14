@@ -37,11 +37,11 @@ class IndividualRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'          => ['required'],
-            'email'         => ['required'],
-            'address'       => ['required'],
-            'phone_number'  => ['required'],
-            'vat_number'    => ['required'],
+            'name'          => ['required', 'max:45'],
+            'email'         => ['required', 'max:255'],
+            'address'       => ['required', 'max:255'],
+            'phone_number'  => ['required', 'max:255'],
+            'vat_number'    => ['required', 'max:255'],
         ];
     }
 }

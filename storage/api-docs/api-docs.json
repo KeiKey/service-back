@@ -500,7 +500,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/TransactionRequest"
+                                "$ref": "#/components/schemas/StoreTransactionRequest"
                             }
                         }
                     }
@@ -602,7 +602,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/TransactionRequest"
+                                "$ref": "#/components/schemas/UpdateTransactionRequest"
                             }
                         }
                     }
@@ -743,8 +743,8 @@
                 },
                 "type": "object"
             },
-            "TransactionRequest": {
-                "title": "TransactionRequest",
+            "StoreTransactionRequest": {
+                "title": "StoreTransactionRequest",
                 "properties": {
                     "amount": {
                         "type": "string",
@@ -767,6 +767,20 @@
                         "example": "example"
                     },
                     "transaction_date": {
+                        "type": "string",
+                        "example": "example"
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateTransactionRequest": {
+                "title": "UpdateTransactionRequest",
+                "properties": {
+                    "description": {
+                        "type": "string",
+                        "example": "example"
+                    },
+                    "status": {
                         "type": "string",
                         "example": "example"
                     }
