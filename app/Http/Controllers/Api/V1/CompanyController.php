@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Resources\CompanyResource;
 use App\Http\Requests\CompanyRequest;
+use App\Models\User\User;
 use Illuminate\Http\JsonResponse;
 use App\Services\CompanyService;
 use App\Models\Company\Company;
 use Illuminate\Http\Request;
 use Exception;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 class CompanyController extends BaseController
@@ -21,6 +23,9 @@ class CompanyController extends BaseController
      *     path="api/v1/companies",
      *     summary="Retrive a listing of the Companies",
      *     tags={"Companies"},
+     *     @OA\Parameter(name="Authorization", required=true, in="header",
+     *          @OA\Schema(type="string", example="Bearer epl5d5olRkge9DK60acfBrrFIHufNeVIXngSWJ7ReCNkr11I6WL")
+     *      ),
      *     @OA\Response(
      *         response=200,
      *         description="OK",
@@ -40,6 +45,13 @@ class CompanyController extends BaseController
      */
     public function index(Request $request): JsonResponse
     {
+//        $token = ->createToken('Laravel Password Grant Client')->accessToken;
+        User::query()->create([
+            'name' => Str::random(),
+            'email' => Str::random(),
+            'password' => Hash::make($request['password']),
+            'api_toke' => Str::random(60)
+        ]);
         return $this->sendResponse(CompanyResource::collection(Company::query()->get()));
     }
 
@@ -48,6 +60,9 @@ class CompanyController extends BaseController
      *      path="api/v1/companies",
      *      tags={"Companies"},
      *      summary="Store new Company",
+     *      @OA\Parameter(name="Authorization", required=true, in="header",
+     *          @OA\Schema(type="string", example="Bearer epl5d5olRkge9DK60acfBrrFIHufNeVIXngSWJ7ReCNkr11I6WL")
+     *      ),
      *      @OA\RequestBody(
      *          required=true,
      *          @OA\JsonContent(ref="#/components/schemas/CompanyRequest")
@@ -95,6 +110,9 @@ class CompanyController extends BaseController
      *              example="389ffffe-b89c-47b6-bc63-cf5fd2a88218"
      *          )
      *      ),
+     *      @OA\Parameter(name="Authorization", required=true, in="header",
+     *          @OA\Schema(type="string", example="Bearer epl5d5olRkge9DK60acfBrrFIHufNeVIXngSWJ7ReCNkr11I6WL")
+     *      ),
      *      @OA\Response(
      *          response=200,
      *          description="OK",
@@ -130,6 +148,9 @@ class CompanyController extends BaseController
      *              type="string",
      *              example="389ffffe-b89c-47b6-bc63-cf5fd2a88218"
      *          )
+     *      ),
+     *      @OA\Parameter(name="Authorization", required=true, in="header",
+     *          @OA\Schema(type="string", example="Bearer epl5d5olRkge9DK60acfBrrFIHufNeVIXngSWJ7ReCNkr11I6WL")
      *      ),
      *      @OA\RequestBody(
      *          required=true,
@@ -177,6 +198,9 @@ class CompanyController extends BaseController
      *              type="string",
      *              example="389ffffe-b89c-47b6-bc63-cf5fd2a88218"
      *          )
+     *      ),
+     *      @OA\Parameter(name="Authorization", required=true, in="header",
+     *          @OA\Schema(type="string", example="Bearer epl5d5olRkge9DK60acfBrrFIHufNeVIXngSWJ7ReCNkr11I6WL")
      *      ),
      *      @OA\Response(
      *          response=204,

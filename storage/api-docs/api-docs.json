@@ -5,6 +5,96 @@
         "version": "0.1"
     },
     "paths": {
+        "api/register": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Register a new User",
+                "operationId": "be6599bdfc41183cf0d19b2519f60ea9",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RegisterRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "example": 0
+                                        },
+                                        "message": {
+                                            "example": ""
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": {
+                                                "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "api/login": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Login an existing User",
+                "operationId": "4ce4077807072036e82d5da69026cf3a",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/LoginRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "example": 0
+                                        },
+                                        "message": {
+                                            "example": ""
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": {
+                                                "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "api/v1/companies": {
             "get": {
                 "tags": [
@@ -12,6 +102,17 @@
                 ],
                 "summary": "Retrive a listing of the Companies",
                 "operationId": "a8122b7dd94304bebfeded6578f13a93",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Bearer epl5d5olRkge9DK60acfBrrFIHufNeVIXngSWJ7ReCNkr11I6WL"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -45,6 +146,17 @@
                 ],
                 "summary": "Store new Company",
                 "operationId": "d6fd101fe893457e049dd69860c0db42",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Bearer epl5d5olRkge9DK60acfBrrFIHufNeVIXngSWJ7ReCNkr11I6WL"
+                        }
+                    }
+                ],
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -100,6 +212,15 @@
                             "type": "string",
                             "example": "389ffffe-b89c-47b6-bc63-cf5fd2a88218"
                         }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Bearer epl5d5olRkge9DK60acfBrrFIHufNeVIXngSWJ7ReCNkr11I6WL"
+                        }
                     }
                 ],
                 "responses": {
@@ -144,6 +265,15 @@
                         "schema": {
                             "type": "string",
                             "example": "389ffffe-b89c-47b6-bc63-cf5fd2a88218"
+                        }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Bearer epl5d5olRkge9DK60acfBrrFIHufNeVIXngSWJ7ReCNkr11I6WL"
                         }
                     }
                 ],
@@ -200,6 +330,15 @@
                             "type": "string",
                             "example": "389ffffe-b89c-47b6-bc63-cf5fd2a88218"
                         }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Bearer epl5d5olRkge9DK60acfBrrFIHufNeVIXngSWJ7ReCNkr11I6WL"
+                        }
                     }
                 ],
                 "responses": {
@@ -237,6 +376,17 @@
                 ],
                 "summary": "Retrive a listing of the Individuals",
                 "operationId": "f52ba5ec2f082e5fdefda67b5e0fa722",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Bearer epl5d5olRkge9DK60acfBrrFIHufNeVIXngSWJ7ReCNkr11I6WL"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -270,6 +420,17 @@
                 ],
                 "summary": "Store new Individual",
                 "operationId": "036a61ac17af2a353e497cf9118de657",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Bearer epl5d5olRkge9DK60acfBrrFIHufNeVIXngSWJ7ReCNkr11I6WL"
+                        }
+                    }
+                ],
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -325,6 +486,15 @@
                             "type": "string",
                             "example": "389ffffe-b89c-47b6-bc63-cf5fd2a88218"
                         }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Bearer epl5d5olRkge9DK60acfBrrFIHufNeVIXngSWJ7ReCNkr11I6WL"
+                        }
                     }
                 ],
                 "responses": {
@@ -369,6 +539,15 @@
                         "schema": {
                             "type": "string",
                             "example": "389ffffe-b89c-47b6-bc63-cf5fd2a88218"
+                        }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Bearer epl5d5olRkge9DK60acfBrrFIHufNeVIXngSWJ7ReCNkr11I6WL"
                         }
                     }
                 ],
@@ -425,6 +604,15 @@
                             "type": "string",
                             "example": "389ffffe-b89c-47b6-bc63-cf5fd2a88218"
                         }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Bearer epl5d5olRkge9DK60acfBrrFIHufNeVIXngSWJ7ReCNkr11I6WL"
+                        }
                     }
                 ],
                 "responses": {
@@ -462,6 +650,17 @@
                 ],
                 "summary": "Retrive a listing of the Transactions",
                 "operationId": "c97a363fb6209c4eb89bf72067a8c46b",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Bearer epl5d5olRkge9DK60acfBrrFIHufNeVIXngSWJ7ReCNkr11I6WL"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -495,6 +694,17 @@
                 ],
                 "summary": "Store new Transaction",
                 "operationId": "5bc125dd97914b35e0777ac87c71fb7d",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Bearer epl5d5olRkge9DK60acfBrrFIHufNeVIXngSWJ7ReCNkr11I6WL"
+                        }
+                    }
+                ],
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -550,6 +760,15 @@
                             "type": "string",
                             "example": "389ffffe-b89c-47b6-bc63-cf5fd2a88218"
                         }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Bearer epl5d5olRkge9DK60acfBrrFIHufNeVIXngSWJ7ReCNkr11I6WL"
+                        }
                     }
                 ],
                 "responses": {
@@ -594,6 +813,15 @@
                         "schema": {
                             "type": "string",
                             "example": "389ffffe-b89c-47b6-bc63-cf5fd2a88218"
+                        }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Bearer epl5d5olRkge9DK60acfBrrFIHufNeVIXngSWJ7ReCNkr11I6WL"
                         }
                     }
                 ],
@@ -649,6 +877,15 @@
                         "schema": {
                             "type": "string",
                             "example": "389ffffe-b89c-47b6-bc63-cf5fd2a88218"
+                        }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Bearer epl5d5olRkge9DK60acfBrrFIHufNeVIXngSWJ7ReCNkr11I6WL"
                         }
                     }
                 ],
@@ -739,6 +976,38 @@
                     "vat_number": {
                         "type": "string",
                         "example": "example"
+                    }
+                },
+                "type": "object"
+            },
+            "LoginRequest": {
+                "title": "LoginRequest",
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "example": "example@example.com"
+                    },
+                    "password": {
+                        "type": "string",
+                        "example": "password"
+                    }
+                },
+                "type": "object"
+            },
+            "RegisterRequest": {
+                "title": "RegisterRequest",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "name"
+                    },
+                    "email": {
+                        "type": "string",
+                        "example": "example@example.com"
+                    },
+                    "password": {
+                        "type": "string",
+                        "example": "password"
                     }
                 },
                 "type": "object"

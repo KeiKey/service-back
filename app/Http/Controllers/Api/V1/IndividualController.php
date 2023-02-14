@@ -20,6 +20,9 @@ class IndividualController extends BaseController
      *     path="api/v1/individuals",
      *     summary="Retrive a listing of the Individuals",
      *     tags={"Individuals"},
+     *     @OA\Parameter(name="Authorization", required=true, in="header",
+     *         @OA\Schema(type="string", example="Bearer epl5d5olRkge9DK60acfBrrFIHufNeVIXngSWJ7ReCNkr11I6WL")
+     *     ),
      *     @OA\Response(
      *         response=200,
      *         description="OK",
@@ -50,6 +53,9 @@ class IndividualController extends BaseController
      *      @OA\RequestBody(
      *          required=true,
      *          @OA\JsonContent(ref="#/components/schemas/IndividualRequest")
+     *      ),
+     *      @OA\Parameter(name="Authorization", required=true, in="header",
+     *          @OA\Schema(type="string", example="Bearer epl5d5olRkge9DK60acfBrrFIHufNeVIXngSWJ7ReCNkr11I6WL")
      *      ),
      *      @OA\Response(
      *          response=201,
@@ -94,6 +100,9 @@ class IndividualController extends BaseController
      *              example="389ffffe-b89c-47b6-bc63-cf5fd2a88218"
      *          )
      *      ),
+     *      @OA\Parameter(name="Authorization", required=true, in="header",
+     *          @OA\Schema(type="string", example="Bearer epl5d5olRkge9DK60acfBrrFIHufNeVIXngSWJ7ReCNkr11I6WL")
+     *      ),
      *      @OA\Response(
      *          response=200,
      *          description="OK",
@@ -129,6 +138,9 @@ class IndividualController extends BaseController
      *              type="string",
      *              example="389ffffe-b89c-47b6-bc63-cf5fd2a88218"
      *          )
+     *      ),
+     *      @OA\Parameter(name="Authorization", required=true, in="header",
+     *          @OA\Schema(type="string", example="Bearer epl5d5olRkge9DK60acfBrrFIHufNeVIXngSWJ7ReCNkr11I6WL")
      *      ),
      *      @OA\RequestBody(
      *          required=true,
@@ -176,6 +188,9 @@ class IndividualController extends BaseController
      *              type="string",
      *              example="389ffffe-b89c-47b6-bc63-cf5fd2a88218"
      *          )
+     *      ),
+     *      @OA\Parameter(name="Authorization", required=true, in="header",
+     *          @OA\Schema(type="string", example="Bearer epl5d5olRkge9DK60acfBrrFIHufNeVIXngSWJ7ReCNkr11I6WL")
      *      ),
      *      @OA\Response(
      *          response=204,
